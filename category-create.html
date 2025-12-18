@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Create Category - BlogHub</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      /* Reuse same style as user-create */
+      .form-container {
+        max-width: 600px;
+        margin: 3rem auto;
+        padding: 2.5rem;
+        background: #fff;
+        border-radius: 12px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      }
+
+      .form-container h2 {
+        text-align: center;
+        margin-bottom: 1.5rem;
+        color: #4a90e2;
+      }
+
+      label {
+        display: block;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+        margin-top: 1rem;
+      }
+
+      input,
+      textarea {
+        width: 100%;
+        padding: 0.75rem 1rem;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        font-size: 1rem;
+        transition: border-color 0.3s, box-shadow 0.3s;
+      }
+
+      input:focus,
+      textarea:focus {
+        border-color: #4a90e2;
+        box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.2);
+        outline: none;
+      }
+
+      button {
+        margin-top: 2rem;
+        width: 100%;
+        padding: 0.85rem;
+        background-color: #4a90e2;
+        color: #fff;
+        border: none;
+        border-radius: 8px;
+        font-size: 1.1rem;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
+
+      button:hover {
+        background-color: #357ab7;
+      }
+
+      @media (max-width: 640px) {
+        .form-container {
+          margin: 2rem 1rem;
+          padding: 2rem 1.5rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navbar -->
+    <header class="navbar">
+      <div class="nav-container">
+        <div class="nav-brand">
+          <i class="fas fa-feather-alt"></i>
+          <h1>BlogHub</h1>
+        </div>
+        <nav class="nav-menu">
+          <a href="index.html" class="nav-link">Home</a>
+          <a href="posts.html" class="nav-link">All Posts</a>
+          <a href="categories.html" class="nav-link active">Categories</a>
+          <a href="users.html" class="nav-link">Users</a>
+          <a href="post-create.html" class="nav-link">Create Post</a>
+        </nav>
+        <div class="nav-actions">
+          <button class="theme-toggle" onclick="toggleTheme()">
+            <i class="fas fa-moon"></i>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="form-container">
+      <h2>Create New Category</h2>
+      <div id="alert-container"></div>
+
+      <form id="category-form">
+        <label>Category Name</label>
+        <input
+          type="text"
+          id="catName"
+          required
+          placeholder="Enter category name"
+        />
+
+        <label>Description</label>
+        <textarea
+          id="descr"
+          rows="3"
+          placeholder="Describe this category (optional)"
+        ></textarea>
+
+        <button type="submit">Create Category</button>
+      </form>
+    </main>
+
+    <script src="js/category-create.js"></script>
+    <script src="js/main.js"></script>
+  </body>
+</html>

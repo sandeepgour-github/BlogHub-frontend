@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script
+      type="text/javascript"
+      src="/___vscode_livepreview_injected_script"
+    ></script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>All Posts - BlogHub</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      .posts-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 1.5rem;
+        margin-top: 1.5rem;
+      }
+
+      .post-card {
+        background: #ffffff;
+        border-radius: 12px;
+        padding: 1.5rem;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        transition: transform 0.2s, box-shadow 0.2s;
+        border: 1px solid #e0e0e0;
+        cursor: pointer;
+      }
+
+      .post-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+      }
+
+      .post-meta {
+        display: flex;
+        justify-content: space-between;
+        font-size: 0.85rem;
+        margin-bottom: 0.5rem;
+        color: #777;
+      }
+
+      .post-category {
+        background: #eaf3ff;
+        padding: 0.2rem 0.5rem;
+        border-radius: 4px;
+        font-weight: bold;
+        color: #1d72b8;
+      }
+
+      .post-title {
+        font-size: 1.3rem;
+        margin-bottom: 0.5rem;
+        color: #333;
+      }
+
+      .post-excerpt {
+        font-size: 0.95rem;
+        color: #555;
+        margin-bottom: 1rem;
+      }
+
+      .post-actions {
+        display: flex;
+        gap: 0.5rem;
+        justify-content: flex-end;
+      }
+
+      .btn {
+        border: none;
+        border-radius: 6px;
+        padding: 0.4rem 0.8rem;
+        font-size: 0.85rem;
+        cursor: pointer;
+        transition: background 0.2s;
+      }
+
+      .btn-edit {
+        background: #4cafef;
+        color: #fff;
+      }
+
+      .btn-edit:hover {
+        background: #359dd9;
+      }
+
+      .btn-danger {
+        background: #e74c3c;
+        color: #fff;
+      }
+
+      .btn-danger:hover {
+        background: #c0392b;
+      }
+      /* Toast container */
+      #toast-container {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        z-index: 2000;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      /* Toast base */
+      .toast {
+        padding: 12px 18px;
+        border-radius: 8px;
+        font-size: 14px;
+        font-weight: 500;
+        color: #fff;
+        min-width: 220px;
+        box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+        opacity: 0;
+        transform: translateX(100%);
+        animation: slideIn 0.4s forwards, fadeOut 0.4s ease-out 3s forwards;
+      }
+
+      /* Toast types */
+      .toast-success {
+        background: #10b981; 
+      }
+      .toast-danger {
+        background: #ef4444; 
+      }
+      .toast-warning {
+        background: #f59e0b; 
+      }
+      .toast-info {
+        background: #3b82f6; 
+      }
+
+      /* Animations */
+      @keyframes slideIn {
+        from {
+          opacity: 0;
+          transform: translateX(100%);
+        }
+        to {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+
+      @keyframes fadeOut {
+        to {
+          opacity: 0;
+          transform: translateX(100%);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navbar -->
+    <header class="navbar">
+      <div class="nav-container">
+        <div class="nav-brand">
+          <i class="fas fa-feather-alt"></i>
+          <h1>BlogHub</h1>
+        </div>
+        <nav class="nav-menu">
+          <a href="index.html" class="nav-link active">Home</a>
+          <a href="categories.html" class="nav-link">Categories</a>
+          <a href="users.html" class="nav-link">Users</a>
+          <a href="user-create.html" class="nav-link">Create User</a>
+          <a href="post-create.html" class="nav-link">Create Post</a>
+        </nav>
+        <button class="theme-toggle" onclick="toggleTheme()">
+          <i class="fas fa-moon"></i>
+        </button>
+      </div>
+    </header>
+    <!-- Main Content -->
+    <!-- <main class="main-content">
+      <section class="page-header">
+        <h2>All Blog Posts</h2>
+        <p>Explore posts and discover new topics</p>
+        <div class="search-box">
+          <input type="text" id="search-term" placeholder="Search posts..." />
+          <i class="fas fa-search"></i>
+        </div>
+      </section>
+
+      <section>
+        <div class="posts-grid" id="posts-list"></div>
+      </section>
+    </main> -->
+    <main class="main-content">
+      <section class="page-header">
+        <h2>All Blog Posts</h2>
+        <p>Explore posts and discover new topics</p>
+
+        <div class="search-box">
+          <input type="text" id="search-term" placeholder="Search posts..." />
+          <i class="fas fa-search"></i>
+        </div>
+
+        <div class="sort-box" style="margin-top: 1rem">
+          <label for="sort-select">Sort by: </label>
+          <select id="sort-select">
+            <option value="createdAt,desc">Newest First</option>
+            <option value="createdAt,asc">Oldest First</option>
+            <option value="title,asc">Title A-Z</option>
+            <option value="title,desc">Title Z-A</option>
+          </select>
+        </div>
+      </section>
+
+      <!-- Posts grid -->
+      <section>
+        <div class="posts-grid" id="posts-list"></div>
+
+        <!-- Pagination buttons -->
+        <div
+          id="pagination"
+          style="margin-top: 1.5rem; text-align: center"
+        ></div>
+      </section>
+    </main>   
+    <div id="toast-container"></div>
+    <script src="js/main.js"></script>
+    <script src="js/posts.js"></script>
+  </body>
+</html>
