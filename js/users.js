@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 async function loadUsers() {
   try {
-    const users = await apiGet("http://localhost:8082/api/users");
+    const users = await apiGet("https://bloghub-985c.onrender.com/api/users");
     displayUsers(users);
   } catch {
     showAlert("❌ Failed to load users.", "error");
@@ -42,7 +42,7 @@ function displayUsers(users) {
 async function deleteUser(id) {
   if (!confirm("Are you sure you want to delete this user?")) return;
   try {
-    await apiDelete(`http://localhost:8082/api/users/${id}`);
+    await apiDelete(`https://bloghub-985c.onrender.com/api/users/${id}`);
     showAlert("✅ User deleted successfully!", "success");
     setTimeout(loadUsers, 500);
   } catch {

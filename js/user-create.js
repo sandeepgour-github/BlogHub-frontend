@@ -8,7 +8,7 @@ document.getElementById("user-form").addEventListener("submit", async (e) => {
   };
 
   try {
-    await apiPost("http://localhost:8082/api/users", user);
+    await apiPost("https://bloghub-985c.onrender.com/api/users", user);
     showAlert("✅ User created successfully!", "success");
     setTimeout(() => (window.location.href = "users.html"), 1500);
   } catch {

@@ -23,7 +23,7 @@ async function loadCategories() {
         <i class="fas fa-spinner fa-spin"></i> Loading categories...
       </div>`;
 
-    const categories = await apiGet("http://localhost:8082/api/categories");
+    const categories = await apiGet("https://bloghub-985c.onrender.com/api/categories");
     allCategories = categories;
     displayCategories(categories);
   } catch (error) {
@@ -87,7 +87,7 @@ async function deleteCategory(catId) {
 
   try {
     const response = await fetch(
-      `http://localhost:8082/api/categories/${catId}`,
+      `https://bloghub-985c.onrender.com/api/categories/${catId}`,
       { method: "DELETE" }
     );
 

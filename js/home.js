@@ -34,9 +34,9 @@ function showToast(message, type = "info") {
 
 // Fetch and display stats
 async function loadStats() {
-  const posts = await apiGet("http://localhost:8082/api/posts/getAll");
-  const authors = await apiGet("http://localhost:8082/api/users");
-  const categories = await apiGet("http://localhost:8082/api/categories");
+  const posts = await apiGet("https://bloghub-985c.onrender.com/api/posts/getAll");
+  const authors = await apiGet("https://bloghub-985c.onrender.com/api/users");
+  const categories = await apiGet("https://bloghub-985c.onrender.com/api/categories");
 
   allPosts = posts || [];
   allAuthors = authors || [];
@@ -98,7 +98,7 @@ function loadFeaturedPosts() {
 // Fetch all posts and display in main list
 async function loadPosts() {
   if (!allPosts || allPosts.length === 0) {
-    allPosts = (await apiGet("http://localhost:8082/api/posts/getAll")) || [];
+    allPosts = (await apiGet("https://bloghub-985c.onrender.com/api/posts/getAll")) || [];
   }
   displayPosts(allPosts);
 }

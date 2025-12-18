@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 async function loadCategories() {
   try {
-    const categories = await apiGet("http://localhost:8082/api/categories");
+    const categories = await apiGet("https://bloghub-985c.onrender.com/api/categories");
     const categorySelect = document.getElementById("category");
     categorySelect.innerHTML = `<option value="">-- Select Category --</option>`;
     categories.forEach((cat) => {
@@ -24,7 +24,7 @@ async function loadCategories() {
 
 async function loadAuthors() {
   try {
-    const authors = await apiGet("http://localhost:8082/api/users");
+    const authors = await apiGet("https://bloghub-985c.onrender.com/api/users");
     const authorSelect = document.getElementById("author");
     authorSelect.innerHTML = `<option value="">-- Select Author --</option>`;
     authors.forEach((author) => {
@@ -53,7 +53,7 @@ async function createPost() {
   };
 
   try {
-    await apiPost("http://localhost:8082/api/posts", post);
+    await apiPost("https://bloghub-985c.onrender.com/api/posts", post);
     showToast("✅ Post created successfully", "success");
 
     document.getElementById("post-form").reset();

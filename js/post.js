@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   try {
-    const post = await apiGet(`http://localhost:8082/api/posts/${postId}`);
+    const post = await apiGet(`https://bloghub-985c.onrender.com/api/posts/${postId}`);
 
     // Fill in the card fields
     document.getElementById("post-title").textContent = post.title;
